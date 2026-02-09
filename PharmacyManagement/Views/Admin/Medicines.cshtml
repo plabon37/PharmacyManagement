@@ -1,0 +1,104 @@
+﻿@model List<Medicine>
+
+@{
+    ViewData["Title"] = "Medicine Management";
+}
+
+<!-- ================= Bootstrap CDN ================= -->
+<!-- Bootstrap is used to style table and buttons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ================= Custom CSS ================= -->
+<style>
+    /* Page background color */
+    body {
+        background-color: #f4f6f9;
+    }
+
+    /* Main container */
+    .medicine-box {
+        width: 90%;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        /* Page heading */
+        .medicine-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    /* Add medicine button */
+    .add-btn {
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    /* Table header style */
+    table th {
+        background-color: #007bff;
+        color: white;
+        text-align: left;
+    }
+
+    /* Action button spacing */
+    .action-btn a {
+        margin-right: 8px;
+        text-decoration: none;
+    }
+</style>
+
+<!-- ================= Medicine Management ================= -->
+<div class="medicine-box">
+
+    <!-- Page title -->
+    <h2>Medicine Management</h2>
+
+    <!-- Add new medicine button -->
+    <a class="btn btn-success add-btn" href="/Medicine/Create">
+        ➕ Add New Medicine
+    </a>
+
+    <!-- Medicine list table -->
+    <table class="table table-bordered table-hover" cellpadding="6">
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var m in Model)
+        {
+            <tr>
+                <!-- Medicine name -->
+                <td>@m.Name</td>
+
+                <!-- Medicine price -->
+                <td>@m.Price</td>
+
+                <!-- Available quantity -->
+                <td>@m.Quantity</td>
+
+                <!-- Edit / Delete actions -->
+                <td class="action-btn">
+                    <a class="btn btn-sm btn-warning"
+                       href="/Medicine/Edit/@m.MedicineId">
+                        Edit
+                    </a>
+
+                    <a class="btn btn-sm btn-danger"
+                       href="/Medicine/Delete/@m.MedicineId"
+                       onclick="return confirm('Are you sure?')">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

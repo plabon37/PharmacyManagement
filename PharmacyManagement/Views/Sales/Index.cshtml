@@ -1,0 +1,76 @@
+﻿@model List<Sale>
+
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<!-- ================= Bootstrap CDN ================= -->
+<!-- Bootstrap is used for responsive table and clean UI -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ================= Custom CSS ================= -->
+<style>
+    /* Page background color */
+    body {
+        background-color: #f4f6f9;
+    }
+
+    /* Sales page container */
+    .sales-box {
+        width: 90%;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        /* Page heading */
+        .sales-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    /* Table header style */
+    table th {
+        background-color: #6f42c1;
+        color: white;
+        text-align: left;
+    }
+</style>
+
+<!-- ================= Sales Page ================= -->
+<div class="sales-box">
+
+    <!-- Page title -->
+    <h2>Sales</h2>
+
+    <!-- Sales table -->
+    <table class="table table-bordered table-hover" cellpadding="6">
+        <tr>
+            <th>Medicine Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Sale Date</th>
+        </tr>
+
+        @foreach (var s in Model)
+        {
+            <tr>
+                <!-- Medicine name -->
+                <td>@s.MedicineName</td>
+
+                <!-- Quantity sold -->
+                <td>@s.Quantity</td>
+
+                <!-- Total price -->
+                <td>@s.TotalPrice</td>
+
+                <!-- Sale date -->
+                <td>@s.SaleDate</td>
+            </tr>
+        }
+    </table>
+
+</div>

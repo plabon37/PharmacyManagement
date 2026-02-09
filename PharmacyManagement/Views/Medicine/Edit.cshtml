@@ -1,0 +1,78 @@
+﻿@model Medicine
+
+@{
+    ViewData["Title"] = "Edit Medicine";
+}
+
+<!-- ================= Bootstrap CDN ================= -->
+<!-- Bootstrap is used for clean form styling -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ================= Custom CSS ================= -->
+<style>
+    /* Page background color */
+    body {
+        background-color: #f4f6f9;
+    }
+
+    /* Edit medicine form container */
+    .medicine-form-box {
+        width: 420px;
+        margin: 100px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        /* Page heading */
+        .medicine-form-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Update button full width */
+        .medicine-form-box button {
+            width: 100%;
+        }
+</style>
+
+<!-- ================= Edit Medicine Page ================= -->
+<div class="medicine-form-box">
+
+    <!-- Page title -->
+    <h2>Edit Medicine</h2>
+
+    <!-- Edit medicine form -->
+    <!-- method="post" submits updated data to controller -->
+    <form method="post">
+
+        <!-- Hidden field for Medicine ID -->
+        <input type="hidden" asp-for="MedicineId" />
+
+        <!-- Medicine name input -->
+        <label class="form-label">Name</label>
+        <input class="form-control" asp-for="Name" />
+
+        <br />
+
+        <!-- Medicine price input -->
+        <label class="form-label">Price</label>
+        <input class="form-control" asp-for="Price" />
+
+        <br />
+
+        <!-- Medicine quantity input -->
+        <label class="form-label">Quantity</label>
+        <input class="form-control" asp-for="Quantity" />
+
+        <br />
+
+        <!-- Submit button -->
+        <button class="btn btn-warning" type="submit">
+            Update
+        </button>
+    </form>
+
+</div>

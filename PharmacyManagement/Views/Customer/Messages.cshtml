@@ -1,0 +1,94 @@
+﻿@model List<PharmacyManagement.Models.Message>
+
+@{
+    ViewData["Title"] = "My Messages";
+}
+
+<!-- ================= Bootstrap CDN ================= -->
+<!-- Bootstrap is used for layout and clean UI -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ================= Custom CSS ================= -->
+<style>
+    /* Page background */
+    body {
+        background-color: #f4f6f9;
+    }
+
+    /* Messages container */
+    .messages-box {
+        width: 80%;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        /* Page heading */
+        .messages-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Message list */
+        .messages-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+    /* Individual message item */
+    .message-item {
+        background-color: #e9f5ff;
+        padding: 15px;
+        border-left: 5px solid #007bff;
+        border-radius: 5px;
+        margin-bottom: 12px;
+    }
+
+    /* Message date */
+    .message-date {
+        font-size: 13px;
+        color: #555;
+    }
+
+    /* Empty message text */
+    .no-message {
+        text-align: center;
+        color: #888;
+    }
+</style>
+
+<!-- ================= My Messages Page ================= -->
+<div class="messages-box">
+
+    <!-- Page title -->
+    <h2>My Notifications</h2>
+
+    <!-- If there are no messages -->
+    @if (!Model.Any())
+    {
+        <p class="no-message">No messages yet.</p>
+    }
+    else
+    {
+        <!-- Message list -->
+        <ul>
+            @foreach (var msg in Model)
+            {
+                <li class="message-item">
+                    <!-- Message date -->
+                    <div class="message-date">
+                        <b>@msg.CreatedAt</b>
+                    </div>
+
+                    <!-- Message text -->
+                    <div>
+                        @msg.MessageText
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+</div>

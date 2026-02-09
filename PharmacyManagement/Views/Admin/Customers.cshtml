@@ -1,0 +1,106 @@
+﻿@model List<User>
+
+@{
+    ViewData["Title"] = "Customers";
+}
+
+<!-- ================= Bootstrap CDN ================= -->
+<!-- Bootstrap is used to improve table and button design -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ================= Custom CSS ================= -->
+<style>
+    /* Page background */
+    body {
+        background-color: #f4f6f9;
+    }
+
+    /* Main container styling */
+    .customers-box {
+        width: 90%;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        /* Page heading */
+        .customers-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    /* Table header style */
+    table th {
+        background-color: #007bff;
+        color: white;
+        text-align: left;
+    }
+
+    /* Action links spacing */
+    .action-link a {
+        margin-right: 8px;
+        text-decoration: none;
+        font-weight: 500;
+    }
+</style>
+
+<!-- ================= Customers Table ================= -->
+<div class="customers-box">
+
+    <!-- Page title -->
+    <h2>Customers</h2>
+
+    <!-- Customers list table -->
+    <table class="table table-bordered table-hover" cellpadding="6">
+        <tr>
+            <th>Name</th>
+           
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var c in Model)
+        {
+            <tr>
+                <!-- Customer name -->
+                <td>@c.Name</td>
+
+              
+
+                <!-- Customer status -->
+                <td>
+                    @if (c.IsActive)
+                    {
+                        <span class="text-success fw-bold">Active</span>
+                    }
+                    else
+                    {
+                        <span class="text-danger fw-bold">Disabled</span>
+                    }
+                </td>
+
+                <!-- Enable / Disable action -->
+                <td class="action-link">
+                    @if (c.IsActive)
+                    {
+                        <a class="btn btn-sm btn-danger"
+                           href="/Admin/DisableCustomer/@c.UserId"
+                           onclick="return confirm('Disable this customer?')">
+                            Disable
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sm btn-success"
+                           href="/Admin/EnableCustomer/@c.UserId">
+                            Enable
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>

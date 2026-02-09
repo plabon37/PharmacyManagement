@@ -1,0 +1,131 @@
+﻿@model List<PharmacyManagement.Models.CartItem>
+
+@{
+    ViewData["Title"] = "My Cart";
+}
+
+<!-- ================= Bootstrap CDN ================= -->
+<!-- Bootstrap is used for table and button styling -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ================= Custom CSS ================= -->
+<style>
+    /* Page background color */
+    body {
+        background-color: #f4f6f9;
+    }
+
+    /* Cart container */
+    .cart-box {
+        width: 90%;
+        margin: 40px auto;
+        background: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+        /* Page heading */
+        .cart-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    /* Quantity control links */
+    .qty-btn {
+        padding: 4px 8px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        margin: 0 4px;
+    }
+
+        .qty-btn:hover {
+            background-color: #0056b3;
+        }
+
+    /* Remove button */
+    .remove-btn {
+        color: #dc3545;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    /* Checkout button */
+    .checkout-btn {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 16px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+</style>
+
+<!-- ================= Cart Page ================= -->
+<div class="cart-box">
+
+    <!-- Page title -->
+    <h2>My Cart</h2>
+
+    <!-- Check if cart is empty -->
+    @if (Model == null || !Model.Any())
+    {
+        <!-- Empty cart message -->
+        <p class="text-center text-muted">Your cart is empty.</p>
+    }
+    else
+    {
+        <!-- Cart items table -->
+        <table class="table table-bordered table-hover" cellpadding="8">
+            <tr>
+                <th>Medicine</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <!-- Medicine name -->
+                    <td>@item.MedicineName</td>
+
+                    <!-- Price per unit -->
+                    <td>@item.Price</td>
+
+                    <!-- Quantity controls -->
+                    <td>
+                        <a class="qty-btn" href="/Cart/Decrease/@item.MedicineId">−</a>
+                        @item.Quantity
+                        <a class="qty-btn" href="/Cart/Increase/@item.MedicineId">+</a>
+                    </td>
+
+                    <!-- Total price -->
+                    <td>@(item.Price* item.Quantity)</td>
+
+                    <!-- Remove item -->
+                    <td>
+                        <a class="remove-btn"
+                           href="/Cart/Remove/@item.MedicineId">
+                            Remove
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <!-- Checkout button -->
+        <div class="text-end">
+            <a class="checkout-btn" href="/Checkout/Index">
+                Proceed to Checkout
+            </a>
+        </div>
+    }
+</div>
